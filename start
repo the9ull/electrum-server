@@ -1,2 +1,6 @@
 #!/bin/bash
-nohup /usr/bin/python -u server.py &>> /var/log/electrum.log &
+which python2 &> /dev/null
+RET=$?
+[ $RET -eq 0 ] && PYTHON=`which python2`
+[ $RET -ne 0 ] && PYTHON=`which python`
+nohup $PYTHON -u server.py &>> /var/log/electrum.log &
